@@ -8,12 +8,13 @@ import json
 from collections import defaultdict
 
 import nltk
-import numpy as np
 import tensorflow as tf
 from bs4 import BeautifulSoup, Comment, NavigableString
 from tqdm import tqdm
 import numpy as np
 from misc import util
+from nltk.corpus import stopwords
+
 
 
 def get_leaves(node, tag_list=[], label=0):
