@@ -29,7 +29,7 @@ def get_dataset(dataset_file, batch_size, repeat=True):
         .prefetch(buffer_size) \
         .padded_batch(
             batch_size=batch_size,
-            padded_shapes=([None, None], [None, 1]),
+            padded_shapes=([None, None], [None, 2]),
             padding_values=(tf.constant(0, dtype=tf.int64), tf.constant(0, dtype=tf.int64))) \
         .shuffle(buffer_size=buffer_size)
     if repeat:
@@ -100,7 +100,7 @@ def main():
         for arg in vars(args):
             writer.writerow([arg, getattr(args, arg)])
 
-    clf.train(train_dataset, train_steps, args.epochs, log_file, ckpt_dir, class_weights,
+    clf.train(train_dataset, train_steps, args.epochs, log_file, ckpt_dir, None,
               dev_dataset, info.get('num_dev_examples'),
               test_dataset, info.get('num_test_examples'),
               args.interval)

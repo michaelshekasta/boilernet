@@ -1,0 +1,1 @@
+tensorflowjs_converter --input_format=keras googletrends_train/ckpt/model.019.h5 googletrends_train/tfjs

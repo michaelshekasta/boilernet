@@ -65,9 +65,9 @@ class LeafClassifier(object):
             lstm = tf.keras.layers.LSTM(self.hidden_size, return_sequences=True)
             model.add(tf.keras.layers.Bidirectional(lstm))
         model.add(tf.keras.layers.Dropout(self.dropout))
-        model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
+        model.add(tf.keras.layers.Dense(2, activation='softmax'))
 
-        model.compile(loss='binary_crossentropy', optimizer='adam')
+        model.compile(loss='categorical_crossentropy', optimizer='adam')
         return model
 
     def train(self, train_dataset, train_steps, epochs, log_file, ckpt, class_weight=(1, 1),
