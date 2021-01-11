@@ -12,7 +12,7 @@ import numpy as np
 import tensorflow as tf
 from bs4 import BeautifulSoup, Comment, NavigableString
 from tqdm import tqdm
-
+import numpy as np
 from misc import util
 
 
@@ -119,7 +119,7 @@ def get_doc_inputs(docs, word_map, tag_map):
         for words_dict, tags_dict, label in doc:
             feature_vector = get_feature_vector(words_dict, tags_dict, word_map, tag_map)
             doc_features.append(_int64_feature(feature_vector))
-            doc_labels.append(_int64_feature([label]))
+            doc_labels.append(_int64_feature(np.eye(2, dtype=int)[label]))
         doc_feature_list = tf.train.FeatureList(feature=doc_features)
         doc_label_list = tf.train.FeatureList(feature=doc_labels)
         yield doc_feature_list, doc_label_list
